@@ -1,5 +1,5 @@
 ﻿using System;
-using tabuleiro;
+using board;
 
 namespace chess_system
 {
@@ -7,13 +7,9 @@ namespace chess_system
     {
         static void Main(string[] args)
         {
-            
-            Posicao P;
 
-            P = new Posicao(3, 4);
+            Board board = new Board(8,8);
 
-            //Testar antes de criar o ToString na classe Posicao
-            Console.WriteLine("Posição: " + P);
         }
     }
 }
