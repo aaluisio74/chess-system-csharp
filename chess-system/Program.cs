@@ -10,6 +10,9 @@ namespace chess_system
 
             Board board = new Board(8,8);
 
+            UI.printBoard(board);
+
+            Console.ReadLine();
         }
     }
 }
