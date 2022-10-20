@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="chess\King.cs" />
+    <Compile Include="chess\Rook.cs" />
     <Compile Include="UI.cs" />
     <Compile Include="board\Board.cs" />
     <Compile Include="board\Color.cs" />

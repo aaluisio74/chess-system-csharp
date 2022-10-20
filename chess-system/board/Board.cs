@@ -1,5 +1,4 @@
-﻿using board;
-using chess_system.board;
+﻿using chess_system.board;
 
 namespace board
 {
@@ -18,6 +17,12 @@ namespace board
         public Piece piece(int row, int column)
         {
             return pieces[row, column];
+        }
+
+        public void placePiece(Piece piece, Position position)
+        {
+            pieces[position.row, position.column] = piece;
+            piece.position = position;
         }
     }
 }
