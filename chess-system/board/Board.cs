@@ -1,6 +1,4 @@
-﻿using chess_system.board;
-
-namespace board
+﻿namespace board
 {
     class Board
     {
@@ -34,6 +32,18 @@ namespace board
 
             pieces[position.row, position.column] = piece;
             piece.position = position;
+        }
+
+        public Piece removePiece(Position position)
+        {
+            if (piece(position) == null)
+            {
+                return null;
+            }
+            Piece aux = piece(position);
+            aux.position = null;
+            pieces[position.row, position.column] = null;
+            return aux;
         }
 
         public Piece piece(Position position)

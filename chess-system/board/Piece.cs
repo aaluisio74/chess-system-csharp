@@ -1,6 +1,6 @@
 ﻿using board;
 
-namespace chess_system.board
+namespace board
 {
     class Piece
     {
@@ -15,6 +15,11 @@ namespace chess_system.board
             this.board = board;
             this.color = color;
             this.numberOfMoves = 0;
+        }
+
+        public void increaseNumberOfMoves()
+        {
+            numberOfMoves++;
         }
     }
 }

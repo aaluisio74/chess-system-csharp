@@ -1,6 +1,6 @@
 ﻿using System;
 using board;
-using chess_system.board;
+using board;
 
 namespace chess_system
 {

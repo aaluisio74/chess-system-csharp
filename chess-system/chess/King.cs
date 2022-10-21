@@ -1,5 +1,4 @@
 ﻿using board;
-using chess_system.board;
 
 namespace chess
 {
