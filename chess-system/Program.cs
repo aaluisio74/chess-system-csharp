@@ -9,11 +9,22 @@ namespace chess_system
     {
         static void Main(string[] args)
         {
-            ChessPosition position = new ChessPosition('c', 7);
+            try
+            {
+                Board board = new Board(8,8);
 
-            Console.WriteLine(position);
+                board.placePiece(new Rook(board, Color.Black), new Position(0, 0));
+                board.placePiece(new Rook(board, Color.Black), new Position(1, 3));
+                board.placePiece(new King(board, Color.Black), new Position(0, 2));
 
-            Console.WriteLine(position.toPosition());
+                board.placePiece(new Rook(board, Color.White), new Position(3, 5));
+
+                UI.printBoard(board);
+            }
+            catch (BoardException e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
             Console.ReadLine();
         }
