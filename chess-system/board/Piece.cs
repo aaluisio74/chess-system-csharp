@@ -2,7 +2,7 @@
 
 namespace board
 {
-    class Piece
+    abstract class Piece //A peça é uma classe muito genérica.
     {
         public Position position { get; set; }
         public Color color { get; protected set; }
@@ -16,6 +16,10 @@ namespace board
             this.color = color;
             this.numberOfMoves = 0;
         }
+
+        //Método abstrato não tem implementação nessa classe.
+        //Quando um método é abstrato, a classe se torna abstrata também.
+        public abstract bool[,] possibleMoves();
 
         public void increaseNumberOfMoves()
         {
