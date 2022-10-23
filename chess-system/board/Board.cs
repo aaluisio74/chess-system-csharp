@@ -17,6 +17,11 @@
             return pieces[row, column];
         }
 
+        public Piece piece(Position position)
+        {
+            return pieces[position.row, position.column];
+        }
+
         public bool thereIsPiece(Position position)
         {
             validatePosition(position);
@@ -44,11 +49,6 @@
             aux.position = null;
             pieces[position.row, position.column] = null;
             return aux;
-        }
-
-        public Piece piece(Position position)
-        {
-            return pieces[position.row, position.column];
         }
 
         //Verifica se a posição é válida

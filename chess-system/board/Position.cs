@@ -5,10 +5,10 @@
         public int row { get; set; }
         public int column { get; set; }
 
-        public Position(int linha, int coluna)
+        public Position(int row, int column)
         {
-            this.row = linha;
-            this.column = coluna;
+            this.row = row;
+            this.column = column;
         }
 
         public void setValues(int row, int column)

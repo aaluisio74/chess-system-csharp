@@ -15,6 +15,7 @@ namespace chess
 
         private bool canMove(Position position)
         {
+            //Teta se a casa está livre ou a cor da peça é adversária
             Piece piece = board.piece(position);
             return piece == null || piece.color != color;
         }

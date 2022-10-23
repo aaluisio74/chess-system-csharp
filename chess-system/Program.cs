@@ -1,7 +1,6 @@
 ﻿using System;
 using board;
 using chess;
-using board;
 
 namespace chess_system
 {
@@ -13,7 +12,7 @@ namespace chess_system
             {
                 ChessMatch chessMatch = new ChessMatch();
 
-                while (!chessMatch.check)
+                while (!chessMatch.finished)
                 {
                     Console.Clear();
                     UI.printBoard(chessMatch.board);
@@ -22,6 +21,13 @@ namespace chess_system
                     Console.Write("Source: ");
                     //Lê a posição e transforma em uma posição de matriz.
                     Position source = UI.readChessPosition().toPosition();
+
+                    bool[,] positionMoves = chessMatch.board.piece(source).possibleMoves();
+
+                    Console.Clear();
+                    UI.printBoard(chessMatch.board, positionMoves);
+
+                    Console.WriteLine();
                     Console.Write("Target: ");
                     Position target = UI.readChessPosition().toPosition();
 
