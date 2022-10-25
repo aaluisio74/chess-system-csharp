@@ -1,6 +1,6 @@
 ﻿namespace board
 {
-    abstract class Piece //A peça é uma classe muito genérica.
+    abstract class Piece //A peça é uma classe muito genérica. Não se define nessa classe os possíveis movimentos.
     {
         public Position position { get; set; }
         public Color color { get; protected set; }
@@ -17,6 +17,29 @@
         public void increaseNumberOfMoves()
         {
             numberOfMoves++;
+        }
+
+        //Existe movimentos possíveis?
+        public bool areTherePossibleMoves()
+        {
+            bool[,] mat = possibleMoves();
+            for (int i = 0; i < board.rows; i++)
+            {
+                for (int j = 0; j < board.columns; j++)
+                {
+                    if (mat[i, j])
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+
+        }
+
+        public bool canMoveTo(Position position)
+        {
+            return possibleMoves()[position.row, position.column];
         }
 
         //Método abstrato não tem implementação nessa classe.
