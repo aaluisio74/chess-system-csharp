@@ -28,7 +28,7 @@ namespace chess
             Position position = new Position(0, 0);
 
             // Above
-            position.setValues(position.row - 1, position.column);
+            position.setValues(base.position.row - 1, base.position.column);
             while (board.validPosition(position) && canMove(position))
             {
                 mat[position.row, position.column] = true;
@@ -40,7 +40,7 @@ namespace chess
             }
 
             // Below
-            position.setValues(position.row + 1, position.column);
+            position.setValues(base.position.row + 1, base.position.column);
             while (board.validPosition(position) && canMove(position))
             {
                 mat[position.row, position.column] = true;
@@ -53,7 +53,7 @@ namespace chess
 
 
             // Right
-            position.setValues(position.row, position.column + 1);
+            position.setValues(base.position.row, base.position.column + 1);
             while (board.validPosition(position) && canMove(position))
             {
                 mat[position.row, position.column] = true;
@@ -65,7 +65,7 @@ namespace chess
             }
 
             //Left
-            position.setValues(position.row, position.column - 1);
+            position.setValues(base.position.row, base.position.column - 1);
             while (board.validPosition(position) && canMove(position))
             {
                 mat[position.row, position.column] = true;

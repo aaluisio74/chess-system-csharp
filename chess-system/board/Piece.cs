@@ -29,8 +29,7 @@
                 {
                     if (mat[i, j])
                     {
-                        return true;
-                    }
+                        return true;                    }
                 }
             }
             return false;

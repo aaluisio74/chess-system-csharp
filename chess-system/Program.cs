@@ -29,10 +29,10 @@ namespace chess_system
                         Position source = UI.readChessPosition().toPosition();
                         chessMatch.validateSourcePosition(source);
 
-                        bool[,] positionMoves = chessMatch.board.piece(source).possibleMoves();
+                        bool[,] possiblePosition = chessMatch.board.piece(source).possibleMoves();
 
                         Console.Clear();
-                        UI.printBoard(chessMatch.board, positionMoves);
+                        UI.printBoard(chessMatch.board, possiblePosition);
 
                         Console.WriteLine();
                         Console.Write("Target: ");

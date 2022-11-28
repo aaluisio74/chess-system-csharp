@@ -20,7 +20,7 @@ namespace chess_system
             Console.WriteLine("  a b c d e f g h");
         }
 
-        public static void printBoard(Board board, bool[,] possibleMoves) //Bugfix
+        public static void printBoard(Board board, bool[,] possiblePosition) //Bugfix
         {
             ConsoleColor originalBackground = Console.BackgroundColor;
             ConsoleColor backgroundChanged = ConsoleColor.DarkGray;
@@ -32,7 +32,7 @@ namespace chess_system
                 {
                     /*Se a posição estiver marcada como uma posição possível de movimento muda o
                       fundo para Cinza escuro, caso contrário, o fundo passa a ser a cor original.*/
-                    if (possibleMoves[i,j])
+                    if (possiblePosition[i,j] == true)
                     {
                         Console.BackgroundColor = backgroundChanged;
                     }
