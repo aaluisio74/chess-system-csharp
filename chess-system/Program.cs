@@ -17,11 +17,7 @@ namespace chess_system
                     try
                     {
                         Console.Clear();
-                        UI.printBoard(chessMatch.board);
-
-                        Console.WriteLine();
-                        Console.WriteLine("Turn: " + chessMatch.turn);
-                        Console.WriteLine("Waiting for play: " + chessMatch.currentPlayer);
+                        UI.printMatch(chessMatch);
 
                         Console.WriteLine();
                         Console.Write("Source: ");

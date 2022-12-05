@@ -1,11 +1,46 @@
 ﻿using board;
 using chess;
 using System;
+using System.Collections.Generic;
 
 namespace chess_system
 {
     class UI
     {
+        public static void printMatch(ChessMatch chessMatch)
+        {
+            printBoard(chessMatch.board);
+            Console.WriteLine();
+            printCapturedPieces(chessMatch);
+            Console.WriteLine("Turn: " + chessMatch.turn);
+            Console.WriteLine("Waiting for play: " + chessMatch.currentPlayer);
+        }
+
+        public static void printCapturedPieces(ChessMatch chessMatch)
+        {
+            Console.WriteLine("Captured pieces:");
+            Console.Write("White: ");
+            printSet(chessMatch.capturedPieces(Color.White));
+            Console.WriteLine();
+            Console.Write("Black: ");
+            ConsoleColor aux = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            printSet(chessMatch.capturedPieces(Color.Black));
+            Console.ForegroundColor = aux;
+            Console.WriteLine();
+            Console.WriteLine();
+        }
+
+        public static void printSet(HashSet<Piece> set)
+        {
+            Console.Write("[");
+            foreach (Piece x in set)
+            {
+                Console.Write(x + " ");
+            }
+            Console.Write("]");
+        }
+
         public static void printBoard(Board board)
         {
             for (int i = 0; i < board.rows; i++)
