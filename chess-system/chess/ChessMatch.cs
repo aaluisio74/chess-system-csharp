@@ -11,6 +11,7 @@ namespace chess
         public bool finished { get; private set; }
         private HashSet<Piece> pieces; // Conjunto de Peças no tabuleiro.
         private HashSet<Piece> captured; // Conjunto de peças capturadas.
+        public bool check { get; private set; }
 
 
         public ChessMatch()
@@ -19,13 +20,14 @@ namespace chess
             turn = 1;
             currentPlayer = Color.White;
             finished = false;
+            check = false;
             //Instancia os conjuntos de peças.
             pieces = new HashSet<Piece>();
             captured = new HashSet<Piece>();
             placePieces();
         }
 
-        public void makeMove(Position source, Position target)
+        public Piece makeMove(Position source, Position target)
         {
             Piece p = board.removePiece(source);
             p.increaseNumberOfMoves();
@@ -35,11 +37,40 @@ namespace chess
             {
                 captured.Add(capturedPiece);
             }
+            return capturedPiece;
+        }
+
+        public void undoMove(Position source, Position target, Piece capturedPiece)
+        {
+            Piece p = board.removePiece(target);
+            p.decreaseNumberOfMoves();
+            if (capturedPiece != null)
+            {
+                board.placePiece(capturedPiece, target);
+                captured.Remove(capturedPiece);
+            }
+            board.placePiece(p, source);
         }
 
         public void nextTurn(Position source, Position target)
         {
-            makeMove(source, target);
+            Piece capturedPiece = makeMove(source, target); //Executa o movimento.
+
+            if (testCheck(currentPlayer)) //Se estiver em xeque, desfaz o movimento.
+            {
+                undoMove(source, target, capturedPiece);
+                throw new BoardException("You cannot put yourself in check!");
+            }
+
+            if (testCheck(adversary(currentPlayer)))
+            {
+                check = true;
+            }
+            else
+            {
+                check = false;
+            }
+
             turn++;
             changePlayer();
         }
@@ -107,6 +138,50 @@ namespace chess
             }
             aux.ExceptWith(capturedPieces(color));
             return aux;
+        }
+
+        private Color adversary(Color color)
+        {
+            if (color == Color.White)
+            {
+                return Color.Black;
+            }
+            else
+            {
+                return Color.White;
+            }
+        }
+
+        private Piece king(Color color)
+        {
+            foreach (Piece x in piecesInPlay(color))
+            {
+                if (x is King)
+                {
+                    return x;
+                }
+            }
+            return null;
+        }
+
+        //Testa se o rei está em cheque
+        public bool testCheck(Color color)
+        {
+            Piece K = king(color);
+            if (K == null)
+            {
+                throw new BoardException("There is no color king " + color + " on the board!");
+            }
+
+            foreach (Piece x in piecesInPlay(adversary(color)))
+            {
+                bool[,] mat = x.possibleMoves();
+                if (mat[K.position.row, K.position.column])
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private void placeNewPiece(char column, int row, Piece piece)

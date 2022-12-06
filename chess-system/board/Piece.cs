@@ -19,6 +19,11 @@
             numberOfMoves++;
         }
 
+        public void decreaseNumberOfMoves()
+        {
+            numberOfMoves--;
+        }
+
         //Existe movimentos possíveis?
         public bool areTherePossibleMoves()
         {
