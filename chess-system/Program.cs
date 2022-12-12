@@ -43,8 +43,8 @@ namespace chess_system
                         Console.ReadLine();
                     }
                 }
-
-                UI.printBoard(chessMatch.board);
+                Console.Clear();
+                UI.printMatch(chessMatch);
             }
             catch (BoardException e)
             {

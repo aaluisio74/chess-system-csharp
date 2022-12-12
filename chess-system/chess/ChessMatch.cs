@@ -56,13 +56,13 @@ namespace chess
         {
             Piece capturedPiece = makeMove(source, target); //Executa o movimento.
 
-            if (testCheck(currentPlayer)) //Se estiver em xeque, desfaz o movimento.
+            if (isInCheck(currentPlayer)) //Se estiver em xeque, desfaz o movimento.
             {
                 undoMove(source, target, capturedPiece);
                 throw new BoardException("You cannot put yourself in check!");
             }
 
-            if (testCheck(adversary(currentPlayer)))
+            if (isInCheck(adversary(currentPlayer)))
             {
                 check = true;
             }
@@ -70,9 +70,15 @@ namespace chess
             {
                 check = false;
             }
-
-            turn++;
-            changePlayer();
+            if (testCheckmate(adversary(currentPlayer)))
+            {
+                finished = true;
+            }
+            else
+            {
+                turn++;
+                changePlayer();
+            }
         }
 
         public void validateSourcePosition(Position position)
@@ -165,7 +171,7 @@ namespace chess
         }
 
         //Testa se o rei está em cheque
-        public bool testCheck(Color color)
+        public bool isInCheck(Color color)
         {
             Piece K = king(color);
             if (K == null)
@@ -184,6 +190,39 @@ namespace chess
             return false;
         }
 
+        public bool testCheckmate(Color color)
+        {
+            if (!isInCheck(color))
+            {
+                return false;
+            }
+
+            foreach (Piece x in piecesInPlay(color))
+            {
+                bool[,] mat = x.possibleMoves();
+
+                for (int i = 0; i < board.rows; i++)
+                {
+                    for (int j = 0; j < board.columns; j++)
+                    {
+                        if (mat[i,j])
+                        {
+                            Position source = x.position;
+                            Position target = new Position(i, j);
+                            Piece capturedPiece = makeMove(source, target);
+                            bool testCheck = isInCheck(color);
+                            undoMove(source, target, capturedPiece);
+                            if (!testCheck)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
         private void placeNewPiece(char column, int row, Piece piece)
         {
             board.placePiece(piece, new ChessPosition(column, row).toPosition());
@@ -193,6 +232,13 @@ namespace chess
         private void placePieces()
         {
             placeNewPiece('c', 1, new Rook(board, Color.White));
+            placeNewPiece('d', 1, new King(board, Color.White));
+            placeNewPiece('h', 7, new Rook(board, Color.White));
+
+            placeNewPiece('a', 8, new King(board, Color.Black));
+            placeNewPiece('b', 8, new Rook(board, Color.Black));
+
+            /*placeNewPiece('c', 1, new Rook(board, Color.White));
             placeNewPiece('c', 2, new Rook(board, Color.White));
             placeNewPiece('d', 2, new Rook(board, Color.White));
             placeNewPiece('e', 2, new Rook(board, Color.White));
@@ -204,7 +250,7 @@ namespace chess
             placeNewPiece('d', 7, new Rook(board, Color.Black));
             placeNewPiece('e', 7, new Rook(board, Color.Black));
             placeNewPiece('e', 8, new Rook(board, Color.Black));
-            placeNewPiece('d', 8, new King(board, Color.Black));
+            placeNewPiece('d', 8, new King(board, Color.Black));*/
         }
     }
 }

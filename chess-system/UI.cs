@@ -11,12 +11,20 @@ namespace chess_system
         {
             printBoard(chessMatch.board);
             Console.WriteLine();
-            printCapturedPieces(chessMatch);
+            printCapturedPieces(chessMatch);        
             Console.WriteLine("Turn: " + chessMatch.turn);
-            Console.WriteLine("Waiting for play: " + chessMatch.currentPlayer);
-            if (chessMatch.check)
+            if (!chessMatch.finished)
             {
-                Console.WriteLine("CHECK!");
+                Console.WriteLine("Waiting for play: " + chessMatch.currentPlayer);
+                if (chessMatch.check)
+                {
+                    Console.WriteLine("CHECK!");
+                }
+            }
+            else
+            {
+                Console.WriteLine("CHECKMATE!");
+                Console.WriteLine("Winner: " + chessMatch.currentPlayer);
             }
         }
 
