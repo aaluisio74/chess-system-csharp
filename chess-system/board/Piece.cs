@@ -41,7 +41,9 @@
 
         }
 
-        public bool canMoveTo(Position position)
+        //Informa se a posição é um movimento possível para a peça.
+        //Trocar o nome para não confundir com o método canMove das peças (King e Rook)
+        public bool possibleMove(Position position)
         {
             return possibleMoves()[position.row, position.column];
         }

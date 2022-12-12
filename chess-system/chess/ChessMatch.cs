@@ -100,7 +100,7 @@ namespace chess
 
         public void validateTargetPosition(Position source, Position target)
         {
-            if (!board.piece(source).canMoveTo(target)) //Warning! Don't forget the exclamation mark for negation.
+            if (!board.piece(source).possibleMove(target)) //Warning! Don't forget the exclamation mark for negation.
             {
                 throw new BoardException("Invalid target position!");
             }

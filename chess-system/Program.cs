@@ -44,7 +44,7 @@ namespace chess_system
                     }
                 }
                 Console.Clear();
-                UI.printMatch(chessMatch);
+                UI.printMatch(chessMatch); // BugFix: UI.printBoard(chessMatch.board);
             }
             catch (BoardException e)
             {
@@ -55,3 +55,8 @@ namespace chess_system
         }
     }
 }
+
+
+
+
+
